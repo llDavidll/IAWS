@@ -4,6 +4,7 @@ project/target
 target
 .target
 tmp
+bin
 .history
 dist
 /.idea
