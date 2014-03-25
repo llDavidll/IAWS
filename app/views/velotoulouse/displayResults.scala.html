@@ -1,0 +1,36 @@
+@(result: Station)
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>V&eacute;los disponibles</title>
+<link rel="stylesheet" href='@routes.Assets.at("stylesheets/velotoulouse.css")'>
+</head>
+<body>
+
+	@if(result.open) {
+	<h1 class="green">Station ouverte</h1>
+	} else {
+	<h1 class="red">Station ferm&eacute;e</h1>
+	}
+
+	<table>
+		<tr>
+			<td><b>Nom de la station : </b></td>
+			<td>@result.name</td>
+		</tr>
+		<tr>
+			<td><b>V&eacute;los disponibles : </b></td>
+			<td>@result.available_bikes</td>
+		</tr>
+		<tr>
+			<td><b>Bornes libres : </b></td>
+			<td>@result.available_stands</td>
+		</tr>
+	</table>
+
+
+	<a href="/velo-toulouse">Retour</a>
+	<a href="/">Menu</a>
+</body>
+</html>

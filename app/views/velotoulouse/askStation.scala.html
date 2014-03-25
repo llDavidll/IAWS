@@ -1,0 +1,27 @@
+@(stationForm: Form[StationsForm])
+@import helper._
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Trouver une station</title>
+<link rel="stylesheet" href='@routes.Assets.at("stylesheets/velotoulouse.css")'>
+</head>
+<body>
+
+	@form(routes.VeloToulouse.displayResults()) {
+
+		@select(
+			stationForm("id"),
+			options(StationsForm.options),
+			'_label -> "Station"
+		)
+		
+		<input type="submit" value="Voir">
+	}
+
+
+	<a href="/">Menu</a>
+</body>
+</html>
