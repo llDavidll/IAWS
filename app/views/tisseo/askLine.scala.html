@@ -1,0 +1,27 @@
+@(lineForm: Form[LinesForm])
+@import helper._
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Trouver une ligne</title>
+<link rel="stylesheet" href='@routes.Assets.at("stylesheets/velotoulouse.css")'>
+</head>
+<body>
+
+	@form(routes.Tisseo.askStop()) {
+
+		@select(
+			lineForm("id"),
+			options(LinesForm.options),
+			'_label -> "Lignes"
+		)
+		
+		<input type="submit" value="Voir">
+	}
+
+
+	<a href="/">Menu</a>
+</body>
+</html>

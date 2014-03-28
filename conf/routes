@@ -9,5 +9,10 @@ GET     /                           controllers.MainMenu.index()
 GET		/velo-toulouse				controllers.VeloToulouse.askStation()
 POST	/velo-toulouse				controllers.VeloToulouse.displayResults()
 
+# Find a bus
+GET		/tisseo						controllers.Tisseo.askLine()
+POST	/tisseo						controllers.Tisseo.askStop()
+POST	/tisseo-schedule			controllers.Tisseo.displayStop()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

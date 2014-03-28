@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>V&eacute;los disponibles</title>
+<meta charset="UTF-8">
+<title>Vélos disponibles</title>
 <link rel="stylesheet" href='@routes.Assets.at("stylesheets/velotoulouse.css")'>
 </head>
 <body>
@@ -11,7 +11,7 @@
 	@if(result.open) {
 	<h1 class="green">Station ouverte</h1>
 	} else {
-	<h1 class="red">Station ferm&eacute;e</h1>
+	<h1 class="red">Station fermée</h1>
 	}
 
 	<table>
@@ -20,7 +20,7 @@
 			<td>@result.name</td>
 		</tr>
 		<tr>
-			<td><b>V&eacute;los disponibles : </b></td>
+			<td><b>Vélos disponibles : </b></td>
 			<td>@result.available_bikes</td>
 		</tr>
 		<tr>

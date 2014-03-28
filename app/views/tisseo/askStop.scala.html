@@ -1,0 +1,29 @@
+@(stopForm: Form[LineStopsForm], lineId: Long)
+@import helper._
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Trouver un arrêt</title>
+<link rel="stylesheet"
+	href='@routes.Assets.at("stylesheets/velotoulouse.css")'>
+</head>
+<body>
+
+	<h1>Ligne : @Tisseo.getLineName(lineId)</h1>
+
+	@form(routes.Tisseo.displayStop) { @select( stopForm("stopId"),
+	options(LineStopsForm.options(lineId)), '_label -> "Arrêt" )
+
+	<input type="hidden" name="lineId" value=@lineId>
+	
+	<input type="submit" value="Voir">
+	
+	}
+
+
+	<a href="/tisseo">Changer de ligne</a>
+	<a href="/">Menu</a>
+</body>
+</html>

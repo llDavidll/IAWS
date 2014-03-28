@@ -1,0 +1,33 @@
+@(stop: LineStopsForm)
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Horaires</title>
+<link rel="stylesheet" href='@routes.Assets.at("stylesheets/velotoulouse.css")'>
+</head>
+<body>
+
+	<h1>Ligne : @Tisseo.getLineName(stop.lineId)</h1>
+	<h2>Arrêt : @Tisseo.getStopName(stop.stopId)</h2>
+	<table>
+	
+		<tr>
+			<td><b>Le bus arrive à</b></td>
+			<td><b>Le bus arrive dans</b></td>
+		</tr>
+		
+		@for((minutes, time) <- Tisseo.getScheduleForStop(stop.lineId, stop.stopId)) {
+			<tr>
+				<td>@time</td>
+				<td>@minutes minutes</td>
+			</tr>
+		        
+		}
+	</table>
+
+	<a href="/tisseo">Changer de ligne</a>
+	<a href="/">Menu</a>
+</body>
+</html>

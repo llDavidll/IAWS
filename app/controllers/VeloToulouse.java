@@ -22,7 +22,7 @@ import scala.concurrent.duration.Duration;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import config.API_KEYS;
+import config.Config;
 
 public class VeloToulouse extends Controller {
 
@@ -87,7 +87,7 @@ public class VeloToulouse extends Controller {
 		// Create a http request
 		Future<Response> future = WS
 				.url("https://api.jcdecaux.com/vls/v1/stations"
-						+ API_KEYS.JC_DECAUX).get();
+						+ Config.JC_DECAUX).get();
 
 		try {
 
@@ -131,7 +131,7 @@ public class VeloToulouse extends Controller {
 		// Create a http request
 		Future<Response> future = WS.url(
 				"https://api.jcdecaux.com/vls/v1/stations/" + pId
-						+ API_KEYS.JC_DECAUX).get();
+						+ Config.JC_DECAUX).get();
 
 		try {
 
