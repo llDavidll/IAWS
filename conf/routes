@@ -14,5 +14,10 @@ GET		/tisseo						controllers.Tisseo.askLine()
 POST	/tisseo						controllers.Tisseo.askStop()
 POST	/tisseo-schedule			controllers.Tisseo.displayStop()
 
+#Create a Line in Data Base
+POST	/lines						controllers.Tisseo.addLine()
+POST	/linesDel					controllers.Tisseo.removeLine()
+GET		/lines						controllers.Tisseo.getLines()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
