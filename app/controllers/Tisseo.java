@@ -13,11 +13,13 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
+import models.Line;
 import models.LineStopsForm;
 import models.LinesForm;
 import play.api.libs.ws.Response;
 import play.api.libs.ws.WS;
 import play.data.Form;
+import play.db.ebean.Model;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -30,6 +32,39 @@ import com.fasterxml.jackson.databind.JsonNode;
 import config.Config;
 
 public class Tisseo extends Controller {
+	
+	/**
+	 * Add a line to the database
+	 * 
+	 * @return
+	 */
+	public static Result addLine(){
+		Line line = Form.form(Line.class).bindFromRequest().get();
+		line.save();
+		return redirect(routes.Tisseo.askLine());
+	}
+	
+	
+	/**
+	 * Remove the last added line from the database
+	 * 
+	 * @return
+	 */
+	public static Result removeLine(){
+		List<Line> lines = new Model.Finder(int.class, Line.class).all();
+		lines.get(lines.size()-1).delete();
+		return redirect(routes.Tisseo.askLine());
+	}
+	
+	/**
+	 * Displays in json format the entire database 
+	 * 
+	 * @return
+	 */
+	public static Result getLines(){
+		List<Line> lines = new Model.Finder(int.class, Line.class).all();
+		return ok(Json.toJson(lines));
+	}
 
 	/**
 	 * Displays a form to choose a line
