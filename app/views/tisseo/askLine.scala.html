@@ -1,27 +1,32 @@
-@(lineForm: Form[LinesForm])
-@import helper._
+@(lineForm: Form[LinesForm]) @import helper._
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Trouver une ligne</title>
-<link rel="stylesheet" href='@routes.Assets.at("stylesheets/velotoulouse.css")'>
+<link rel="stylesheet"
+	href='@routes.Assets.at("stylesheets/velotoulouse.css")'>
 </head>
 <body>
 
-	@form(routes.Tisseo.askStop()) {
+	@form(routes.Tisseo.askStop()) { @select( lineForm("id"),
+	options(LinesForm.options), '_label -> "Lignes" )
 
-		@select(
-			lineForm("id"),
-			options(LinesForm.options),
-			'_label -> "Lignes"
-		)
-		
-		<input type="submit" value="Voir">
-	}
+	<input type="submit" value="Voir"> }
+	 
+	<form action="@routes.Tisseo.addLine()" method="post">
+		<input type="hidden" name="name" value="nom de ma ligne">
+		 <input type="submit" value="Liker la ligne">
+	</form>
+
+
+	<form action="@routes.Tisseo.removeLine()" method="post">
+		<input type="submit" value="Unliker la ligne">
+	</form>
 
 
 	<a href="/">Menu</a>
 </body>
+
 </html>
