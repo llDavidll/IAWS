@@ -1,4 +1,4 @@
-@(stopForm: Form[LineStopsForm], lineId: Long)
+@(stopForm: Form[LineStopsForm], lineName: String, lineId: Long)
 @import helper._
 
 <!DOCTYPE html>
@@ -9,9 +9,28 @@
 <link rel="stylesheet"
 	href='@routes.Assets.at("stylesheets/velotoulouse.css")'>
 </head>
+
 <body>
 
-	<h1>Ligne : @Tisseo.getLineName(lineId)</h1>
+	<h1>Ligne : @lineName</h1>
+
+	@if(Tisseo.isLineLiked(lineId)) {
+	
+		@form(routes.Tisseo.removeLine) {
+			<input id="unlike_button" type="hidden" name="lineId" value="@lineId">
+			<input type="submit" value="Unliker la ligne">
+		}
+	} else {
+		@form(routes.Tisseo.addLine) {
+			<input type="hidden" name="lineId" value="@lineId">
+			<input type="hidden" name="name" value="@lineName">
+			 <input type="submit" value="Liker la ligne">
+		}
+	}
+
+	
+
+	
 
 	@form(routes.Tisseo.displayStop) { @select( stopForm("stopId"),
 	options(LineStopsForm.options(lineId)), '_label -> "Arrêt" )
@@ -21,7 +40,8 @@
 	<input type="submit" value="Voir">
 	
 	}
-
+	
+	
 
 	<a href="/tisseo">Changer de ligne</a>
 	<a href="/">Menu</a>

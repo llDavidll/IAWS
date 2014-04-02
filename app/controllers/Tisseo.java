@@ -32,36 +32,83 @@ import com.fasterxml.jackson.databind.JsonNode;
 import config.Config;
 
 public class Tisseo extends Controller {
-	
+
 	/**
 	 * Add a line to the database
 	 * 
 	 * @return
 	 */
-	public static Result addLine(){
-		Line line = Form.form(Line.class).bindFromRequest().get();
+	public static Result addLine() {
+
+		Line line = form(Line.class).bindFromRequest().get();
+
+		// Create the form object for the askStop view
+		Form<LineStopsForm> stopsForm = form(LineStopsForm.class);
+				
+		List<Line> lines = new Model.Finder(int.class, Line.class).all();
+		for (Line l : lines) {
+
+			if (l.lineId == line.lineId) {
+
+				l.update();
+				return ok(views.html.tisseo.askStop.render(stopsForm,
+						getLineName(line.lineId), line.lineId));
+			}
+		}
+
 		line.save();
-		return redirect(routes.Tisseo.askLine());
+
+		return ok(views.html.tisseo.askStop.render(stopsForm,
+				getLineName(line.lineId), line.lineId));
 	}
-	
-	
+
 	/**
 	 * Remove the last added line from the database
 	 * 
 	 * @return
 	 */
-	public static Result removeLine(){
+	public static Result removeLine() {
+
+		Line line = form(Line.class).bindFromRequest().get();
+
+		// Create the form object for the askStop view
+		Form<LineStopsForm> stopsForm = form(LineStopsForm.class);
+				
 		List<Line> lines = new Model.Finder(int.class, Line.class).all();
-		lines.get(lines.size()-1).delete();
-		return redirect(routes.Tisseo.askLine());
+		for (Line l : lines) {
+
+			if (l.lineId == line.lineId) {
+
+				l.delete();
+				return ok(views.html.tisseo.askStop.render(stopsForm,
+						getLineName(line.lineId), line.lineId));
+			}
+		}
+
+		return ok(views.html.tisseo.askStop.render(stopsForm,
+				getLineName(line.lineId), line.lineId));
 	}
-	
+
+	public static boolean isLineLiked(long pLineId) {
+
+		List<Line> lines = new Model.Finder(int.class, Line.class).all();
+		for (Line l : lines) {
+
+			if (l.lineId == pLineId) {
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	/**
-	 * Displays in json format the entire database 
+	 * Displays in json format the entire database
 	 * 
 	 * @return
 	 */
-	public static Result getLines(){
+	public static Result getLines() {
 		List<Line> lines = new Model.Finder(int.class, Line.class).all();
 		return ok(Json.toJson(lines));
 	}
@@ -98,7 +145,7 @@ public class Tisseo extends Controller {
 		Form<LineStopsForm> stopsForm = form(LineStopsForm.class);
 
 		return ok(views.html.tisseo.askStop.render(stopsForm,
-				linesForm.get().id));
+				getLineName(linesForm.get().id), linesForm.get().id));
 	}
 
 	/**
