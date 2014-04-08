@@ -14,8 +14,8 @@ public class Line extends Model {
 	private static final long serialVersionUID = 1L;
 
 	@Version
-    public Timestamp lastUpdate;
-	
+	public Timestamp lastUpdate;
+
 	@Id
 	public int id;
 

@@ -15,7 +15,6 @@ public class LinesForm extends Model {
 	public long id;
 
 	public static Map<String, String> options() {
-
 		return Tisseo.getLinesFromArea();
 	}
 }
