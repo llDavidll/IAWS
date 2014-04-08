@@ -15,9 +15,8 @@ public class StationsForm extends Model {
 
 	@Id
 	public int id;
-	
-	public static Map<String, String> options() {
 
+	public static Map<String, String> options() {
 		return VeloToulouse.getAllStations();
 	}
 }

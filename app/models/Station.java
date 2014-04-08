@@ -8,10 +8,9 @@ public class Station extends Model {
 
 	public int id;
 	public String name;
-	
+
 	public boolean open;
 	public int available_stands;
 	public int available_bikes;
-	
-	
+
 }
